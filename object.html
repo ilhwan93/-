@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            console.log("안녕")
+            var card = {
+                suit: '하트',
+                rank: 'A',                
+            } // 객체 생성
+            console.log(card.suit) //객체 호출
+            console.log(card['rank']) // 객체 호출
+            
+            card.color = 'red' //프로퍼티 생성
+            console.log(card.color) // red
+            console.log(card) //객체
+            delete card.color       //color 프로퍼티 삭제 
+            console.log(card.color) //undefined
+            console.log("color" in card) //false
+            var p = {
+                center: {x: 1, y: 2.5}, //원을 표현하는 객체
+                radius: 2.5
+            };
+            console.log(p.center); //{x:1, y:2.5}
+            console.log(p.center.x); // 1
+            console.log(p.center['x']); //1
+            var a = p;
+            console.log(a.center);  // p변수는 객체를 참조함 -> a변수는 p 변수를 참조함 -> a변수가 객체를 참조함
+            
+            var circle = {
+                center: {x:1, y: 2}, //원의 중점의 좌표를 표현하는 객체
+                radius: 2.5,    //원의 반지름
+                area: function (){            
+                    return Math.PI * this.radius * this.radius;  //원의 넓이를 구하는 메서드
+            }
+        };
+        console.log(circle.area()) // 19.634954084.....
+
+        circle.translate = function(a,b){    
+            this.center.x = this.center.x + a;   //메서드 추가
+            this.center.y = this.center.y + b;  
+                    
+        };
+        circle.translate(1,2);   //메서드 실행
+        console.log(circle.center);  //프로퍼티 값 변경
+        </script>
+    </body>
+</html>

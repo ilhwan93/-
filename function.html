@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            function square(x){
+                return x * x;
+            }
+           
+            console.log(square(3)) //x는 인자(parameter) = 함수정의문의 인수 , 3은 인수
+           console.log(square)  //함수는 캐멀표기법 또는 밑줄 표기법을 사용함.
+                                //캐멀표기법 : showYourName, 밑줄표기법: show_your_name
+            
+            function dist(p, q){
+                var q = {  //점 q를 나타내는 객체
+                    x: 1,
+                    y: 1
+                }
+                var p = {  //점 p를 나타내는 객체
+                    x: 3,
+                    y: 3
+                }
+                var dx = q.x - p.x; //q와 p의 x좌표상의 거리
+                var dy = q.y - p.y; //q와 p의 y좌표상의 거리
+                return Math.sqrt(dx*dx+dy*dy); 
+            }
+            console.log(dist(1,1)) //루트8 = 2.828.....
+            
+            console.log(square3(5)); //25
+            function square3(x) {    // 함수선언문의 호이스팅
+                return x * x;
+            }
+            function add1(x){
+                return x = x + 1; //인수를 받아 + 1하여 반환.
+            }
+            var a = 3;
+            var b = add1(a); //여기서 a의 복사본인 원시값3 그자체를 인자에 전달함.-> 함수식 3=3+1이 됨-> 4를 반환
+            console.log(`a = ${a}, b = ${b}`); // a = 3, b = 4
+            
+            function add2(k){
+                k.x = k.x +1; k.y = k.y +1; return k;  
+            }
+            var a = {x:3, y:4}; //a는 객체를 참조함 -> a는 객체의 위치,주소를 복사함
+            var b = add2(a); //a의 복사본이 함수식의 인자 k에 전달됨, 이때 인자 k는 원시값이 아닌 객체의 위치,주소를 복사함. 따라서 k.x값이 변하면 a의 값이 변한다.
+            console.log(a,b); //{x:4, y:5} , {x:4, y:5}
+            
+            var a = "grobal" //전역변수 a
+            function fx(){
+                var a = "local"; //지역변수 a
+                console.log(a);
+                return a;
+            }
+            fx(); //local -> 함수내에서는 지역변수 a가 유효
+            
+            console.log(a) // grobal -> 함수밖에서는 전역변수 a가 유효
+            
+            function f(){
+                a = "local";
+                console.log(a);
+                return a;
+            }
+            f(); //local -> 함수내에서 a는 local
+            console.log(a); //local -> a가 함수내에서 선언되어 지역변수라고 생각할수 있지만 var로 선언되지 않았기 때문에 전역변수이다.
+                                        //var은 함수밖으로 나갈수 없는 지역변수이다.
+                                        
+            let x = "naver"
+            function kk(){
+                let x = "daum";
+                console.log(x);
+                return x;
+            }
+            kk(); //지역변수 x는 중괄호 {} 내에서만 유효
+            console.log(x); // 전역변수 x는 전체범위에서 유효
+
+            /*
+            console.log(yahoo) //에러발생: 야후를 선언하기 전에 사용할수 없음
+            let yahoo = "www.yahoo.kr" 
+                                
+            let google; //에러발생 동일스콥내에서 동일변수를 중복하여 선언할수없음
+            let google; 
+          
+        
+           console.log(japan) // tdz이됨-> 선언이 호이스팅되어도 tdz존이라 사용할수 없고 에러가 발생함
+           let japan = 7 // 선언이 호이스팅 됨
+           
+           console.log(korea) //tdz존이 됨 - > 선언이 호이스팅되어도 tdz이라 사용할수 없고 에러가 발생함
+           const korea = 0 // 선언이 호이스팅됨        
+           const rr; // const는 선언과 동시에 할당이 되어야함
+           */
+
+           var google; //선언하고 값을 할당하지 않아도 오류가 발생하지 않음
+           var google; //중복선언해도 이전의 값이 초기화 되어 오류가 발생하지 않음 즉 호이스팅됨
+           console.log(google) //undefined
+           google = 10 //값을 할당, 이때 선언은 호이스팅되지만 할당은 호이스팅 되지 않음
+           console.log(google) //10
+          /*
+           console.log(plus(1)) //에러 발생함 -> 익명함수는 호이스팅되지않음
+           var plus = function(x){
+            return x + 1;        
+           }; //이름이 없는 익명함수는 반드시 마지막에 세미콜론이 들어가야함
+          */
+           console.log(kk(1)) //2 이름이 있는 함수는 호이스팅됨
+           function kk(x){
+            return x + 1;
+           }
+           
+           var minus = function mm(x){
+            return x + 1
+           };
+           console.log(minus(1)); //2
+
+           //mm(1); // 익명함수는 함수 이름을 설정하였다해도 익명으로 저장되기 때문에 함수 이름만으로 읽어낼수 없음
+           minus(1); //2 -> 익명함수여도 함수를 참조하고있는 변수의 값으로 호출할수있음
+           //함수를 사용하는 방법
+           //익명함수: 함수를 객체로 참조하고 있는 변수명(); ex) minus();
+           //이름있는함수: 함수이름();
+        </script>
+    </body>
+</html>
